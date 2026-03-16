@@ -9,10 +9,6 @@ It provides:
 - Claim decomposition questions used to improve evidence grounding
 - Inference and evaluation scripts for reproducing reported results
 
-<p align="center">
-  <img src="pipeline.png" alt="QuanTemp pipeline" />
-</p>
-
 ```mermaid
 flowchart LR
   A["Fact-checking sites<br/>(45 sources)"]:::src
