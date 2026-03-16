@@ -1,4 +1,4 @@
-# QuanTemp
+# Claim Veracity Pipeline
 
 This is a SIGIR 2024 benchmark and inference pipeline for fact-checking real-world numerical and temporal claims.
 
@@ -12,6 +12,40 @@ It provides:
 <p align="center">
   <img src="pipeline.png" alt="QuanTemp pipeline" />
 </p>
+
+```mermaid
+flowchart LR
+  A["Fact-checking sites<br/>(45 sources)"]:::src
+  B["15,514 numerical<br/>claims"]:::claims
+  C1["statistical"]:::tax
+  C2["temporal"]:::tax
+  C3["comparison"]:::tax
+  C4["interval"]:::tax
+  D["Claim decomposition<br/>ClaimDecomp / ProgramFC"]:::step
+  E["BM25 evidence<br/>retrieval · top-100"]:::step
+  F["NLI inference<br/>FinQA-RoBERTa"]:::step
+  G1["True"]:::pos
+  G2["False"]:::neg
+  G3["Conflicting"]:::neu
+  H["Evaluation<br/>Macro-F1 · 58.32"]:::eval
+
+  A --> B
+  B --> C1 & C2 & C3 & C4
+  C1 & C2 & C3 & C4 --> D
+  D --> E
+  E --> F
+  F --> G1 & G2 & G3
+  G1 & G2 & G3 --> H
+
+  classDef src     fill:#F1EFE8,stroke:#5F5E5A,color:#444441
+  classDef claims  fill:#EEEDFE,stroke:#534AB7,color:#3C3489
+  classDef tax     fill:#E1F5EE,stroke:#0F6E56,color:#085041
+  classDef step    fill:#FAEEDA,stroke:#854F0B,color:#633806
+  classDef pos     fill:#EAF3DE,stroke:#3B6D11,color:#27500A
+  classDef neg     fill:#FCEBEB,stroke:#A32D2D,color:#791F1F
+  classDef neu     fill:#F1EFE8,stroke:#5F5E5A,color:#444441
+  classDef eval    fill:#FAECE7,stroke:#993C1D,color:#712B13
+```
 
 ---
 
